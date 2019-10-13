@@ -19,6 +19,7 @@ I had to learn how develope and design a web service using different sources fro
 There were some difficulties since i worked on intellij and i never developed a web application in this platform before.
 I have read about different servers to install like glassfish and apache and eventually found the site  start.spring.io 
 which helped me bootstrap my application.
+in addition, i spent some time on dowloading the docker and i eventually found out i didnt have the right version of windows to do that.
 
 
 
