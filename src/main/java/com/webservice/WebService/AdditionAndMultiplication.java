@@ -26,7 +26,7 @@ public class AdditionAndMultiplication {
         //copy the content of the string to the first number array
         for (int i = 0; i < number1.length(); i++) {
             // check if every letter in the string can be casted to integer
-            // if not return the user am message that he has to choose 2 numbers.
+            // if not return the user a message that he has to choose 2 numbers.
             if(number1.charAt(i)<'0' || number1.charAt(i)>'9'){
                 return "You must choose 2 numbers";
             }
@@ -36,7 +36,7 @@ public class AdditionAndMultiplication {
         //copy the content of the string to the second number array
         for (int j = 0; j < number2.length(); j++) {
             // check if every letter in the string can be casted to integer
-            // if not return the user am message that he has to choose 2 numbers.
+            // if not return the user a message that he has to choose 2 numbers.
             if(number2.charAt(j)<'0' || number2.charAt(j)>'9'){
                 return "You must choose 2 numbers";
             }
@@ -86,7 +86,7 @@ public class AdditionAndMultiplication {
             // if the second array's length is bigger than the first array's length, pad the first array with zeros at the start.
             // in order to add them comfortably. newNum is the first array after padding.
             newNum = paddingWithZeros(secondNum,firstNum);
-            //set firstBigger to false since the second array is longer than the furst array.
+            //set firstBigger to false since the second array is longer than the first array.
             firstBigger = false;
         }
         else {
@@ -97,26 +97,31 @@ public class AdditionAndMultiplication {
         int placeInSum = 0;
         // going thorough the 2 arrays and add them
         for (int i = newNum.length - 1; i >= 0; i--) {
-            // if firstBigger is true the newNum array is the second array.
+            // if firstBigger is true the newNum array represents the second array.
             if(firstBigger){
                 tempSum = firstNum[i] + newNum[i];
             }
             else {
-                // if firstBigger is false the newNum array is the first array.
+                // if firstBigger is false the newNum array represents the first array.
                 tempSum = newNum[i] + secondNum[i];
             }
             if (tempSum < 10) {
+                //regular addition
                 sum[placeInSum] = tempSum;
             } else {
+                // take the second digit of tempSum
                 sum[placeInSum] = tempSum % 10;
                 if (i > 0) {
                     if(firstBigger) {
+                        // add 1 to the i-1 position in the first array so that next iteration the 1 will be added to the result
                         firstNum[i - 1] += 1;
                     }
                     else {
+                        //add 1 to the i-1 position in the newNum array so that next iteration the 1 will be added to the result
                         newNum[i-1]+=1;
                     }
                 } else {
+                    // if it's the last iteration than add the numbers regularly
                     sum[placeInSum + 1] = 1;
                 }
             }
@@ -134,10 +139,10 @@ public class AdditionAndMultiplication {
 
 
     /**
-     * multiply function. This function gets 2 array of numbers and multiplies them.
+     * multiply function. This function gets 2 arrays of numbers and multiplies them.
      * @param firstNum =  the first number presented as an array
      * @param secondNum = the second number presented as an array
-     * @return sum = the sum of the 2 numbers presented as an array.
+     * @return mult = the multiplication result of the 2 numbers presented as an array.
      */
     public int[] multiply(int[] firstNum, int[] secondNum) {
         int len1 = firstNum.length;
@@ -163,20 +168,17 @@ public class AdditionAndMultiplication {
             for (int j = len2 - 1; j >= 0; j--) {
                 // Take current digit of second number
                 int num2 = secondNum[j];
-
                 // Multiply with current digit of first number and add result to previously stored result and the above number.
                 int sum = num1 * num2 + mult[posNum1 + posNum2] + addAbove;
-                // add above for next itaration
+                // add above for next iteration
                 addAbove = sum / 10;
                 // Store result
                 mult[posNum1 + posNum2] = sum % 10;
                 posNum2++;
             }
-
             // store the addAbove in next cell
             if (addAbove > 0)
                 mult[posNum1 + posNum2] += addAbove;
-
             // shift position to left after every multiplication of a digit in the first number.
             posNum1++;
         }
